@@ -20,7 +20,10 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::with('user')->get();
+        $user = auth()->user();
+        $todos = Todo::with('user')
+            ->where('user_id', $user->id)
+            ->get();
 
         return $this->apiSuccess($todos);
     }
