@@ -67,6 +67,9 @@ class TodoController extends Controller
     public function update(TodoRequest $request, Todo $todo)
     {
         $request->validated();
+        $todo->title = $request->title;
+        $todo->label = $request->label;
+        $todo->done = $request->done;
         $todo->save();
         return $this->apiSuccess($todo->load('user'));
     }
